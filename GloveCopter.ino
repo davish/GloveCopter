@@ -1,24 +1,21 @@
-/*
-  Syma S107 Helicopter controler
-  Protocol spec: http://www.jimhung.co.uk/?p=901
-  Binary conversion code: http://www.kerrywong.com/2012/08/27/reverse-engineering-the-syma-s107g-ir-protocol/
-  License: https://raw.github.com/dbh937/files/master/license
-  Author: Davis Haupt
-  Date: 12/10/12
-*/
-
 const int LED = 3; // The LED
-const int hi = // the duration, in us, of a pulse
-const int FREQ = 38000 // The carrier frequency
+const int FREQ = 38000; // The carrier frequency
 
+unsigned long t;
 
 void setup() {
   pinMode(LED, OUTPUT); // Set pin to output
+  t = millis();
 }
 
-void loop() {}
+void loop() {
+  if (t - millis() == 180) {
+    exampleController();
+    t = millis();
+  }
+}
 
-void preamble() {
+void header() {
   tone(LED, FREQ);
   delayMicroseconds(2000); // Delay 2 milliseconds
   noTone(LED); // stop the tone
@@ -39,4 +36,23 @@ void one() {
   delayMicroseconds(700);
 }
 
+void footer() {
+  tone(LED, FREQ);
+  delayMicroseconds(300);
+  noTone(LED);
+}
 
+
+// Example controler that just turns the throttle on 50%
+// 00111111 00111111 00111111
+void exampleController() {
+  header();
+  zero(); zero(); one(); one(); one(); one(); one(); one();
+  zero(); zero(); one(); one(); one(); one(); one(); one();
+  zero(); zero(); one(); one(); one(); one(); one(); one();
+  footer();
+}
+
+void processBit(int b) {
+  b == 1 ? one() : zero();
+}
