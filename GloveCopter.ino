@@ -1,5 +1,10 @@
+/*
+  License: 
+*/
+
 const int LED = 3; // The LED
 const int FREQ = 38000; // The carrier frequency
+
 
 unsigned long t;
 
@@ -53,6 +58,11 @@ void exampleController() {
   footer();
 }
 
-void processBit(int b) {
-  b == 1 ? one() : zero();
+
+void sendCommand(int throttle, ) {
+  for (int i = 7; i >=0; i--) {
+    // Fancy Bit-shifting courtesy of Kerry Wong
+    b = ((ROTATION_STATIONARY + leftRight) & (1 << i)) >> i;    
+    if (b > 0) sendOne(); else sendZero();
+  }
 }
