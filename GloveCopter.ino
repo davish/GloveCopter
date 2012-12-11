@@ -20,7 +20,7 @@ void loop() {
   if(currentMicros - previousMicros >= 180000) {
     Serial.println(currentMicros - previousMicros);
     previousMicros = currentMicros;
-    sendCommand(63, 63, 63);
+    sendCommand(0, 0, 63);
   }
 }
 
@@ -42,22 +42,6 @@ void sendOne() {
 void sendFooter() {
   pulseIR(300);
 }
-
-
-// Example controler that just turns the throttle on 50%
-// 00111111 00111111 00111111 00111000
-/*void exampleController() {
-  header();
-  zero(); zero(); one(); one(); one(); one(); one(); one();
-  
-  zero(); zero(); one(); one(); one(); one(); one(); one();
-  
-  zero(); zero(); one(); one(); one(); one(); one(); one();
-  
-  zero(); zero(); one(); one(); one(); zero(); zero(); zero();
-  footer();
-  Serial.println("Transmitted.");
-} */
 
 
 void sendCommand(int leftRight, int forwardBack, int throttle) {
