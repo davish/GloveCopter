@@ -5,10 +5,17 @@
 const int LED = 3; // The LED
 const int FREQ = 38000; // The carrier frequency
 const int ROTATION_STATIONARY = 63;
+const int CAL = -30 // Trim
 
 long previousMicros = 0;
 
 int pulse = 0;
+
+int Throttle, LeftRight, ForwardBackward;
+
+Throttle = 0;
+LeftRight = 0;
+ForwardBackward = 0;
 
 void setup() {
   pinMode(LED, OUTPUT); // Set pin to output
@@ -18,9 +25,8 @@ void setup() {
 void loop() {
   unsigned long currentMicros = micros();
   if(currentMicros - previousMicros >= 180000) {
-    Serial.println(currentMicros - previousMicros);
     previousMicros = currentMicros;
-    sendCommand(0, 0, 63);
+    sendCommand(LeftRight, ForwardBackward, Throttle);
   }
 }
 
@@ -46,9 +52,9 @@ void sendFooter() {
 
 void sendCommand(int leftRight, int forwardBack, int throttle) {
   sendHeader();
-  
+  // Fancy Bitwise logic courtesy of Kerry Wong
   for (int i = 7; i >=0; i--) {
-    int b = ((ROTATION_STATIONARY + leftRight) & (1 << i)) >> i; // Fancy Bitwise logic courtesy of Kerry Wong    
+    int b = ((ROTATION_STATIONARY + leftRight + CAL) & (1 << i)) >> i;     
     if (b > 0) sendOne(); else sendZero();
   }
   for (int i = 7; i >=0; i--) {
@@ -79,8 +85,4 @@ void pulseIR(long microsecs) {
  
 }
 
-void pulseIR_tone(int pin, long microsecs) {
-  tone(pin, 38000);
-  delayMicroseconds(microsecs);
-  noTone(pin);
-}
+
