@@ -1,18 +1,17 @@
 const int LED = 3; // The LED
 const int FREQ = 38000; // The carrier frequency
 const int ROTATION_STATIONARY = 63;
-const int CAL = -30 // Trim
+const int CAL = -30; // Trim
 
 long previousMicros = 0;
 
 int pulse = 0;
 
-int Throttle, LeftRight, ForwardBackward;
 
 // Change the values below to control the copter
-Throttle = 0; 
-LeftRight = 0;
-ForwardBackward = 0;
+int Throttle = 0; 
+int LeftRight = 0;
+int ForwardBackward = 0;
 
 void setup() {
   pinMode(LED, OUTPUT); // Set pin to output
@@ -20,15 +19,16 @@ void setup() {
 }
 
 void loop() {
-  Throttle = getZeroes();
-  LeftRight = getZeroes();
-  ForwardBackward = getZeroes();
-  
   unsigned long currentMicros = micros();
   if(currentMicros - previousMicros >= 180000) {
     previousMicros = currentMicros;
     sendCommand(LeftRight, ForwardBackward, Throttle);
+    Serial.println(Throttle);
   }
+  Throttle = analogRead(0); // "invert" so less pressure is a lower number
+  Throttle = map(Throttle, 0, 1023, 0, 127);
+  LeftRight = getZeroes();
+  ForwardBackward = getZeroes();
 }
 
 int getZeroes() { return 0; }
