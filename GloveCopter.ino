@@ -1,7 +1,3 @@
-/*
-  License: 
-*/
-
 const int LED = 3; // The LED
 const int FREQ = 38000; // The carrier frequency
 const int ROTATION_STATIONARY = 63;
@@ -13,7 +9,8 @@ int pulse = 0;
 
 int Throttle, LeftRight, ForwardBackward;
 
-Throttle = 0;
+// Change the values below to control the copter
+Throttle = 0; 
 LeftRight = 0;
 ForwardBackward = 0;
 
