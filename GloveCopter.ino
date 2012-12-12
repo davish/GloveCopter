@@ -20,12 +20,18 @@ void setup() {
 }
 
 void loop() {
+  Throttle = getZeroes();
+  LeftRight = getZeroes();
+  ForwardBackward = getZeroes();
+  
   unsigned long currentMicros = micros();
   if(currentMicros - previousMicros >= 180000) {
     previousMicros = currentMicros;
     sendCommand(LeftRight, ForwardBackward, Throttle);
   }
 }
+
+int getZeroes() { return 0; }
 
 void sendHeader() {
   pulseIR(2000);
