@@ -57,11 +57,11 @@ void sendCommand(int leftRight, int forwardBack, int throttle) {
   sendHeader();
   // Fancy Bitwise logic courtesy of Kerry Wong
   for (int i = 7; i >=0; i--) {
-    int b = ((ROTATION_STATIONARY + leftRight + CAL) & (1 << i)) >> i;     
+    int b = ((leftRight + CAL) & (1 << i)) >> i;     
     if (b > 0) sendOne(); else sendZero();
   }
   for (int i = 7; i >=0; i--) {
-    int b = ((ROTATION_STATIONARY + forwardBack) & (1 << i)) >> i; 
+    int b = ((forwardBack) & (1 << i)) >> i; 
     if (b > 0) sendOne(); else sendZero();
   }
   for (int i = 7; i >=0; i--) {
