@@ -1,7 +1,7 @@
 const int LED = 3; // The LED
 const int FREQ = 38000; // The carrier frequency
 const int ROTATION_STATIONARY = 63;
-const int CAL = -30; // Trim
+const int CAL = 0; // Trim
 
 long previousMicros = 0;
 
@@ -23,12 +23,12 @@ void loop() {
   if(currentMicros - previousMicros >= 180000) {
     previousMicros = currentMicros;
     sendCommand(LeftRight, ForwardBackward, Throttle);
-    Serial.println(Throttle);
+    Serial.println(getTilt(0));
   }
-  Throttle = analogRead(0); // "invert" so less pressure is a lower number
+  Throttle = analogRead(5);
   Throttle = map(Throttle, 0, 1023, 0, 127);
-  LeftRight = getZeroes();
-  ForwardBackward = getZeroes();
+  LeftRight = getTilt(1);
+  ForwardBackward = getTilt(0);
 }
 
 int getZeroes() { return 0; }
@@ -71,6 +71,19 @@ void sendCommand(int leftRight, int forwardBack, int throttle) {
   
   sendFooter();
 }
+
+int getTilt(int pin) {
+  int reading = analogRead(pin);
+  if (reading <= 330) // Less than lower threshold
+    reading = -5;
+  else if (reading >= 340) // Greater than upper threshold
+    reading = 5;
+  else
+    reading = reading - 335; // just get it within 
+  return floor(map(reading, -5, 5, 0, 127));
+}
+
+
 
 void pulseIR(long microsecs) {
  
