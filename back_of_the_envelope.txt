@@ -1,0 +1,7 @@
+y: 320, 346
+x: 322, 346
+
+330
+340
+
+ok, so let's make the ranges for x and y to be 330-340.
