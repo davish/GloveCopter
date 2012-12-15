@@ -26,9 +26,11 @@ void loop() {
   unsigned long currentMicros = micros();
   if(currentMicros - previousMicros >= 180000) {
     previousMicros = currentMicros;
-    Serial.println(Throttle);
+//    Serial.println(Throttle);
     Serial.println(LeftRight);
+    Serial.println(analogRead(1));
     Serial.println(ForwardBackward);
+    Serial.println(analogRead(0));
     Serial.println(" ");
   }
   Throttle = analogRead(5);
