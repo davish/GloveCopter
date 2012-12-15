@@ -88,7 +88,7 @@ int getTilt(int pin) {
     reading = reading - 335; // just get it within
   int r;
   if (pin == 1) {
-    r = floor(map(reading, -5, 5, 31, 95));
+    r = floor(map(reading, -5, 5, 0, 127));
   }
   else
     r = floor(map(reading, -5, 5, 127, 0)); // Pitch needs to be flipped
