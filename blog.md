@@ -20,7 +20,18 @@ Tested it again, and it worked with Kerry Wong's sketch. It didn't have good ran
 ## Parts Arrive, prototyping! ##
 ### 12/13/12 ###
 
-Today the accelerometer and IR LEDs arrived! As soon as I got the package from Adafruit I opened it up and soldered the header to the accelerometer. After playing with it a little, I decided that the range for the tilt should be the equivalent of 330 - 340 on the output of the accelerometer. It was about 45 degrees from 335 (center, no movement) to 340 (tilted to a side). Observing the Z-axis, I decided that there wasn't enough change to measure up/down for throttle control, so I'll just use a potentiometer instead. I modified the sketch to let the pitch and yaw be controlled by the x and y axes, respectively. The Throttle is now controlled by a pot connected to analog pin 5. Tomorrow I'll have some more time to play with this setup, and see how sensitive it actually is.
+Today the accelerometer and IR LEDs arrived! As soon as I got the package from Adafruit I opened it up and soldered the headers to the accelerometer. After playing with it a little, I decided that the range for the tilt should be the equivalent of 330 - 340 on the output of the accelerometer. It was about 45 degrees from 335 (center, no movement) to 340 (tilted to a side). Observing the Z-axis, I decided that there wasn't enough change to measure up/down for throttle control, so I'll just use a potentiometer instead. I modified the sketch to let the pitch and yaw be controlled by the x and y axes, respectively. The Throttle is now controlled by a pot connected to analog pin 5. Tomorrow I'll have some more time to play with this setup, and see how sensitive it actually is.
+
+## A working controller ##
+### 12/14/12 ###
+
+Today, I really got down to a working prototype. I had a glitch in the code from the night before that I had fixed during the day, so I uploaded it when I got home and got cracking. After a change which made it easier to keep the copter steady, I was really flying. Since this is still more than a little rough around the edges, it's a challenge to fly. I was bumping into walls a lot of the time, and every time the helicopter hit a wall, it fell. Finally, I run out of charge, so I take a break to charge back up. When I come back, I turn on my camera to document the working prototype when I realize my back rotor is not completely on. It had come off while it was spinning and hitting the wall at the same time. Luckily, every S107 comes with a spare one of these small rotors, so I grabbed mine, slapped it on, and tested it with the regular controller to make sure it was on correctly. When I was back to video documenting the project, I realize how hard it is to capture both the copter and me in the same frame with a homemade tripod (really just my walled in the front, and my Kelvin.23 in the back with my Bloggie in the middle). I did get a few good shots, but they were all at most 15 seconds long. If I want this to be a good controller, flights should be at least a minute and a half long. Now that I know that everything is basically functioning, I have two main goals:
+
+1. Add stability to the controller
+	- make it easier to control throttle (joystick maybe?)
+2. Add range to the controller
+	- the range is better with the super-bright LEDs, but still not good. I don't know if wiring more LEDs in parallel would help, but in one of the articles I read about the S107 it said that transistor switching would enlarge the range. 
+		- do research on transistor switching and how they relate to LEDs.
 
 
 [1]: http://hackaday.com/2012/12/08/more-fun-with-syma-107-reverse-engineering/
