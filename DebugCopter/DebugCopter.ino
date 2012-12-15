@@ -86,13 +86,16 @@ int getTilt(int pin) {
     reading = 5;
   else
     reading = reading - 335; // just get it within
-    
+  int r;
   if (pin == 1) {
-    return floor(map(reading, -5, 5, 31, 94));
+    r = floor(map(reading, -5, 5, 31, 95));
   }
-  return floor(map(reading, -5, 5, 0, 127));
+  else
+    r = floor(map(reading, -5, 5, 127, 0)); // Pitch needs to be flipped
+  if (r <= 80 && r >= 50)
+    r = 63;
+  return r;
 }
-
 
 
 void pulseIR(long microsecs) {
