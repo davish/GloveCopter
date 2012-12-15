@@ -1,7 +1,7 @@
 const int LED = 3; // The LED
 const int FREQ = 38000; // The carrier frequency
 const int ROTATION_STATIONARY = 63;
-const int CAL = 0; // Trim
+const int CAL = -10; // Trim
 
 long previousMicros = 0;
 
@@ -23,10 +23,14 @@ void loop() {
   if(currentMicros - previousMicros >= 180000) {
     previousMicros = currentMicros;
     sendCommand(LeftRight, ForwardBackward, Throttle);
+    
+    Serial.println(ForwardBackward);
+    Serial.println(analogRead(0));
+    Serial.println(' ');
   }
   Throttle = map(analogRead(5), 0, 1023, 0, 127);
-  LeftRight = getTilt(1);
-  ForwardBackward = getTilt(0);
+  LeftRight = getTiltY(1);
+  ForwardBackward = getTiltX(0);
 }
 
 int getZeroes() { return 0; }
@@ -55,11 +59,11 @@ void sendCommand(int leftRight, int forwardBack, int throttle) {
   sendHeader();
   // Fancy Bitwise logic courtesy of Kerry Wong
   for (int i = 7; i >=0; i--) {
-    int b = ((leftRight) & (1 << i)) >> i;     
+    int b = ((leftRight + ROTATION_STATIONARY + CAL) & (1 << i)) >> i;     
     if (b > 0) sendOne(); else sendZero();
   }
   for (int i = 7; i >=0; i--) {
-    int b = ((forwardBack) & (1 << i)) >> i; 
+    int b = ((forwardBack + ROTATION_STATIONARY) & (1 << i)) >> i; 
     if (b > 0) sendOne(); else sendZero();
   }
   for (int i = 7; i >=0; i--) {
@@ -70,7 +74,7 @@ void sendCommand(int leftRight, int forwardBack, int throttle) {
   sendFooter();
 }
 
-int getTilt(int pin) {
+int getTiltY(int pin) {
   int reading = analogRead(pin);
   if (reading <= 330) // Less than lower threshold
     reading = -5;
@@ -78,14 +82,38 @@ int getTilt(int pin) {
     reading = 5;
   else
     reading = reading - 335; // just get it within
+  if (reading == 1 || reading == -1)
+    reading = 0;
   int r;
   if (pin == 1) {
-    r = floor(map(reading, -5, 5, 0, 127));
+    r = floor(map(reading, -5, 5, -62, 62));
   }
   else
-    r = floor(map(reading, -5, 5, 127, 0)); // Pitch needs to be flipped
-  if (r <= 80 && r >= 50)
-    r = 63;
+    r = floor(map(reading, -5, 5, 62, -62)); // Pitch needs to be flipped
+  
+  if (r > 62)
+    r = 62;
+  if (r < -62)
+    r = -62;
+  return r;
+}
+
+int getTiltX(int pin) {
+    int reading = analogRead(pin);
+  if (reading <= 335) // Less than lower threshold
+    reading = -5;
+  else if (reading >= 345) // Greater than upper threshold
+    reading = 5;
+  else
+    reading = reading - 340; // just get it within
+  if (reading == 1 || reading == -1)
+    reading = 0;
+  int r;
+  r = floor(map(reading, -5, 5, 62, -62)); // Pitch needs to be flipped
+  if (r > 62)
+    r = 62;
+  if (r < -62)
+    r = -62;
   return r;
 }
 
