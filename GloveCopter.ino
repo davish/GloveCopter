@@ -23,10 +23,8 @@ void loop() {
   if(currentMicros - previousMicros >= 180000) {
     previousMicros = currentMicros;
     sendCommand(LeftRight, ForwardBackward, Throttle);
-    Serial.println(getTilt(0));
   }
-  Throttle = analogRead(5);
-  Throttle = map(Throttle, 0, 1023, 0, 127);
+  Throttle = map(analogRead(5), 0, 1023, 0, 127);
   LeftRight = getTilt(1);
   ForwardBackward = getTilt(0);
 }
@@ -57,7 +55,7 @@ void sendCommand(int leftRight, int forwardBack, int throttle) {
   sendHeader();
   // Fancy Bitwise logic courtesy of Kerry Wong
   for (int i = 7; i >=0; i--) {
-    int b = ((leftRight + CAL) & (1 << i)) >> i;     
+    int b = ((leftRight) & (1 << i)) >> i;     
     if (b > 0) sendOne(); else sendZero();
   }
   for (int i = 7; i >=0; i--) {
@@ -79,10 +77,13 @@ int getTilt(int pin) {
   else if (reading >= 340) // Greater than upper threshold
     reading = 5;
   else
-    reading = reading - 335; // just get it within 
-  return floor(map(reading, -5, 5, 0, 127));
+    reading = reading - 335; // just get it within
+    
+  if (pin == 1) {
+    return floor(map(reading, -5, 5, 31, 95));
+  }
+  return floor(map(reading, -5, 5, 127, 0)); // Pitch needs to be flipped
 }
-
 
 
 void pulseIR(long microsecs) {
