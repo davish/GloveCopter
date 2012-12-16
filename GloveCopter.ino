@@ -84,13 +84,7 @@ int getTiltY(int pin) {
     reading = reading - 335; // just get it within
   if (reading == 1 || reading == -1)
     reading = 0;
-  int r;
-  if (pin == 1) {
-    r = floor(map(reading, -5, 5, -62, 62));
-  }
-  else
-    r = floor(map(reading, -5, 5, 62, -62)); // Pitch needs to be flipped
-  
+  int r = floor(map(reading, -5, 5, -62, 62));
   if (r > 62)
     r = 62;
   if (r < -62)
