@@ -25,12 +25,12 @@ void loop() {
     sendCommand(LeftRight, ForwardBackward, Throttle);
   }
   Throttle = map(analogRead(5), 0, 1023, 0, 127);
-  LeftRight = getTiltY(1);
+  LeftRight = getTiltY(1) + CAL;
   ForwardBackward = getTiltX(0);
   
-  if (LeftRight + CAL > 62)
+  if (LeftRight > 62)
     LeftRight = 62;
-  else if (LeftRight + CAL < -62)
+  else if (LeftRight < -62)
     LeftRight = -62;
 }
 
@@ -60,7 +60,7 @@ void sendCommand(int leftRight, int forwardBack, int throttle) {
   sendHeader();
   // Fancy Bitwise logic courtesy of Kerry Wong
   for (int i = 7; i >=0; i--) {
-    int b = ((leftRight + ROTATION_STATIONARY + CAL) & (1 << i)) >> i;     
+    int b = ((leftRight + ROTATION_STATIONARY) & (1 << i)) >> i;     
     if (b > 0) sendOne(); else sendZero();
   }
   for (int i = 7; i >=0; i--) {
