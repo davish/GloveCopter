@@ -1,7 +1,6 @@
 const int LED = 3; // The LED
 const int FREQ = 38000; // The carrier frequency
 const int ROTATION_STATIONARY = 63;
-const int CAL = -10; // Trim
 const int CAL = -7; // Trim
 
 long previousMicros = 0;
@@ -24,14 +23,15 @@ void loop() {
   if(currentMicros - previousMicros >= 180000) {
     previousMicros = currentMicros;
     sendCommand(LeftRight, ForwardBackward, Throttle);
-    
-    Serial.println(ForwardBackward);
-    Serial.println(analogRead(0));
-    Serial.println(' ');
   }
   Throttle = map(analogRead(5), 0, 1023, 0, 127);
   LeftRight = getTiltY(1);
   ForwardBackward = getTiltX(0);
+  
+  if (LeftRight + CAL > 62)
+    LeftRight = 62;
+  else if (LeftRight + CAL < -62)
+    LeftRight = -62;
 }
 
 int getZeroes() { return 0; }
