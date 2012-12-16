@@ -1,5 +1,6 @@
 # The Copter Glove #
-#### Arduino-Powered IR motion control glove for the S107 toy helicopter ####
+### Arduino-Powered IR motion control glove for the S107 toy helicopter ###
+#### Progress documented on [GitHub][8] ####
 
 ## The Idea ##
 ### 11/9/12 ###
@@ -33,6 +34,11 @@ Today, I really got down to a working prototype. I had a glitch in the code from
 	- the range is better with the super-bright LEDs, but still not good. I don't know if wiring more LEDs in parallel would help, but in one of the articles I read about the S107 it said that transistor switching would enlarge the range. 
 		- do research on transistor switching and how they relate to LEDs.
 
+## Improving the code ##
+### 12/16/12 ###
+
+Yeasterday and today all I was working on really was taking out some of the kinks. You can check out the commits from 
+
 
 [1]: http://hackaday.com/2012/12/08/more-fun-with-syma-107-reverse-engineering/
 [2]: http://www.thinkgeek.com/product/f2c6/
@@ -41,3 +47,4 @@ Today, I really got down to a working prototype. I had a glitch in the code from
 [5]: http://adafruit.com/products/388
 [6]: http://adafruit.com/products/1018
 [7]: http://www.avergottini.com/2011/05/arduino-helicopter-infrared-controller.html
+[8]: https://github.com/dbh937/GloveCopter
