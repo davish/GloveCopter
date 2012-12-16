@@ -2,6 +2,7 @@ const int LED = 3; // The LED
 const int FREQ = 38000; // The carrier frequency
 const int ROTATION_STATIONARY = 63;
 const int CAL = -10; // Trim
+const int CAL = -7; // Trim
 
 long previousMicros = 0;
 
