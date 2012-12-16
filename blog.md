@@ -37,7 +37,7 @@ Today, I really got down to a working prototype. I had a glitch in the code from
 ## Improving the code ##
 ### 12/16/12 ###
 
-Yeasterday and today all I was working on really was taking out some of the kinks. You can check out the commits from 
+Yesterday and today all I was working on really was taking out some of the kinks. You can check out the commits from those two days on [GitHub][8] if you're interested. I really need to work out the trim though, right now I have to tilt my hand to the right to get the copter flying steady. Once I get the final parts and build I'll probably add a pot for trim.
 
 
 [1]: http://hackaday.com/2012/12/08/more-fun-with-syma-107-reverse-engineering/
