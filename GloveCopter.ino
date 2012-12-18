@@ -5,6 +5,13 @@ const int ROTATION_STATIONARY = 63;
 const int CAL = -5; // Trim
 // const int TRIMPOT = 0;
 
+// Now the min and max on the accelerometer
+const int XMIN = 330;
+const int XMAX = 340;
+
+const int YMIN = 330;
+const int YMAX = 340;
+
 long previousMicros = 0;
 
 int pulse = 0;
