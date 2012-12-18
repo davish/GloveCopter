@@ -86,9 +86,9 @@ void sendCommand(int leftRight, int forwardBack, int throttle) {
 
 int getTiltY(int pin) {
   int reading = analogRead(pin);
-  if (reading <= 330) // Less than lower threshold
+  if (reading <= YMIN) // Less than lower threshold
     reading = -5;
-  else if (reading >= 340) // Greater than upper threshold
+  else if (reading >= YMAX) // Greater than upper threshold
     reading = 5;
   else
     reading = reading - 335; // just get it within
@@ -104,12 +104,12 @@ int getTiltY(int pin) {
 
 int getTiltX(int pin) {
     int reading = analogRead(pin);
-  if (reading <= 335) // Less than lower threshold
+  if (reading <= XMIN) // Less than lower threshold
     reading = -5;
-  else if (reading >= 345) // Greater than upper threshold
+  else if (reading >= XMAX) // Greater than upper threshold
     reading = 5;
   else
-    reading = reading - 340; // just get it within
+    reading = reading - 335; // just get it within
   if (reading == 1 || reading == -1)
     reading = 0;
   int r;
