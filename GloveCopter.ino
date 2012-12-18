@@ -9,11 +9,11 @@ const int CAL = -5; // Trim
 // Now the min and max on the accelerometer
 const int XMIN = 325;
 const int XMAX = 345;
-const int XMID = XMIN + (XMAX - XMIN) / 2
+const int XMID = XMIN + (XMAX - XMIN) / 2;
 
 const int YMIN = 325;
 const int YMAX = 345;
-const int YMID = YMIN + (YMAX - YMIN) / 2
+const int YMID = YMIN + (YMAX - YMIN) / 2;
 
 long previousMicros = 0;
 
@@ -34,7 +34,9 @@ void loop() {
   unsigned long currentMicros = micros();
   if(currentMicros - previousMicros >= 180000) {
     previousMicros = currentMicros;
-    sendCommand(LeftRight, 0, Throttle);
+    if(Throttle != 0) {
+      sendCommand(LeftRight, ForwardBackward, Throttle);
+    }
     Serial.println(LeftRight);
     Serial.println(ForwardBackward);
   }
@@ -98,7 +100,7 @@ int getTiltY(int pin) {
     reading = YMID - YMIN;
   else
     reading = reading - YMID; // just get it within
-  if (reading == 2 || reading == -2)
+  if (reading == 1 || reading == -1)
     reading = 0;
   int r = floor(map(reading, 0 - (YMID - YMIN), YMID - YMIN, -62, 62));
   if (r > 62)
@@ -116,7 +118,7 @@ int getTiltX(int pin) {
     reading = XMID - XMIN;
   else
     reading = reading - 335; // just get it within
-  if (reading == 2 || reading == -2)
+  if (reading == 1 || reading == -1)
     reading = 0;
   int r;
   r = floor(map(reading, 0 - (XMID - XMIN), XMID - XMIN, 62, -62)); // Pitch needs to be flipped
