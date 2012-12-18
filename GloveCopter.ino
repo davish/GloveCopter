@@ -7,11 +7,13 @@ const int CAL = -5; // Trim
 // const int TRIMPOT = 0;
 
 // Now the min and max on the accelerometer
-const int XMIN = 330;
-const int XMAX = 340;
+const int XMIN = 325;
+const int XMAX = 345;
+const int XMID = XMIN + (XMAX - XMIN) / 2
 
-const int YMIN = 330;
-const int YMAX = 340;
+const int YMIN = 325;
+const int YMAX = 345;
+const int YMID = YMIN + (YMAX - YMIN) / 2
 
 long previousMicros = 0;
 
@@ -90,14 +92,15 @@ void sendCommand(int leftRight, int forwardBack, int throttle) {
 int getTiltY(int pin) {
   int reading = analogRead(pin);
   if (reading <= YMIN) // Less than lower threshold
-    reading = -5;
+    reading = 0 - (YMID - YMIN);
+    // if ymid is 335, I want this to be 0 - (ymid - ymin)
   else if (reading >= YMAX) // Greater than upper threshold
-    reading = 5;
+    reading = YMID - YMIN;
   else
-    reading = reading - 335; // just get it within
-  if (reading == 1 || reading == -1)
+    reading = reading - YMID; // just get it within
+  if (reading == 2 || reading == -2)
     reading = 0;
-  int r = floor(map(reading, -5, 5, -62, 62));
+  int r = floor(map(reading, 0 - (YMID - YMIN), YMID - YMIN, -62, 62));
   if (r > 62)
     r = 62;
   if (r < -62)
@@ -108,15 +111,15 @@ int getTiltY(int pin) {
 int getTiltX(int pin) {
     int reading = analogRead(pin);
   if (reading <= XMIN) // Less than lower threshold
-    reading = -5;
+    reading = 0 - (XMID - XMIN);
   else if (reading >= XMAX) // Greater than upper threshold
-    reading = 5;
+    reading = XMID - XMIN;
   else
     reading = reading - 335; // just get it within
-  if (reading == 1 || reading == -1)
+  if (reading == 2 || reading == -2)
     reading = 0;
   int r;
-  r = floor(map(reading, -5, 5, 62, -62)); // Pitch needs to be flipped
+  r = floor(map(reading, 0 - (XMID - XMIN), XMID - XMIN, 62, -62)); // Pitch needs to be flipped
   if (r > 62)
     r = 62;
   if (r < -62)
