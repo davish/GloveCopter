@@ -3,6 +3,7 @@ const int LED = 3; // The LED
 const int FREQ = 38000; // The carrier frequency
 const int ROTATION_STATIONARY = 63;
 const int CAL = -5; // Trim
+
 // const int TRIMPOT = 0;
 
 // Now the min and max on the accelerometer
@@ -31,7 +32,9 @@ void loop() {
   unsigned long currentMicros = micros();
   if(currentMicros - previousMicros >= 180000) {
     previousMicros = currentMicros;
-    sendCommand(LeftRight, ForwardBackward, Throttle);
+    sendCommand(LeftRight, 0, Throttle);
+    Serial.println(LeftRight);
+    Serial.println(ForwardBackward);
   }
   Throttle = map(analogRead(5), 0, 1023, 0, 127);
   LeftRight = getTiltY(1) + CAL;
