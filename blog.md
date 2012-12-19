@@ -39,6 +39,11 @@ Today, I really got down to a working prototype. I had a glitch in the code from
 
 Yesterday and today all I was working on really was taking out some of the kinks. You can check out the commits from those two days on [GitHub][8] if you're interested. I really need to work out the trim though, right now I have to tilt my hand to the right to get the copter flying steady. Once I get the final parts and build I'll probably add a pot for trim.
 
+## Finishing the controller ##
+### 12/18/12 ###
+
+I think today I can finally say that the controller is finished. I will still need to tweak calibrations when I move from the prototype controller to a final, more glove-like form. An [Arduino Micro][9] some [Adafruit Proto-Boards][10]. I don't have access to a 3D printer, but I was thinking of either covering a bent clothes hanger with sugru, or designing a model to get printed on Shapeways. With the addition of an adjustable minimum/maximum values for x and y axes, the program can be used by anyone with an arduino, accelerometer (not just the one I use) and an IR LED. The one more thing on my to-do list is to add support for a trim potentiometer.
+
 
 [1]: http://hackaday.com/2012/12/08/more-fun-with-syma-107-reverse-engineering/
 [2]: http://www.thinkgeek.com/product/f2c6/
@@ -48,3 +53,5 @@ Yesterday and today all I was working on really was taking out some of the kinks
 [6]: http://adafruit.com/products/1018
 [7]: http://www.avergottini.com/2011/05/arduino-helicopter-infrared-controller.html
 [8]: https://github.com/dbh937/GloveCopter
+[9]: http://adafruit.com/products/1086
+[10]: http://adafruit.com/products/571
