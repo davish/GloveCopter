@@ -8,3 +8,11 @@ ok, so let's make the ranges for x and y to be 330-340.
 
 
 335 340 
+
+Joystick notes
+---
+Center: Low: 460 High: 530
+
+Up: 167
+
+Down: 810-ish
