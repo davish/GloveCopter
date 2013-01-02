@@ -44,6 +44,11 @@ Yesterday and today all I was working on really was taking out some of the kinks
 
 I think today I can finally say that the controller is finished. I will still need to tweak calibrations when I move from the prototype controller to a final, more glove-like form. An [Arduino Micro][9] some [Adafruit Proto-Boards][10]. I don't have access to a 3D printer, but I was thinking of either covering a bent clothes hanger with sugru, or designing a model to get printed on Shapeways. With the addition of an adjustable minimum/maximum values for x and y axes, the program can be used by anyone with an arduino, accelerometer (not just the one I use) and an IR LED. The one more thing on my to-do list is to add support for a trim potentiometer.
 
+## Modifying the Throttle Control ##
+### 1/1/13 ###
+
+Back from vacation, I'm starting to put together the less clunky version 2.0 of the remote. I realized that using a volume dial to control the throttle wouldn't be too practical if you wanted to use the remote with only one hand (the hand you're wearing it on). So, I decided to use a joystick. Moving the joystick up or down would add or subtract a certain number from the throttle. Leaving the joystick alone would keep the throttle the same, so no need to keep your hand on the throttle all the time if you're just hovering. Hopefully tonight I can draw up some circuit diagrams for reference and get started soldering everything into the final package. About that "final package:" My first idea was to use a 3D printer to print out something that would be like a more stable and solid version of my first prototype, but I don't have access to a 3D printer. Next idea: bend a clothes hanger into a shape I can mount my components on, and then cover it with sugru to make it smooth and look pretty. While (idiotically) trying to cut the clothes hangar, I broke my wire cutters. So, I've decided to just put velcro around the Adafruit perf board I have, and strap it to my hand, and hold the battery pack a kind of grip in my palm. The velcro is good because I can just remove it if I find a better solution.
+
 
 [1]: http://hackaday.com/2012/12/08/more-fun-with-syma-107-reverse-engineering/
 [2]: http://www.thinkgeek.com/product/f2c6/
