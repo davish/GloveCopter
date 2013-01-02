@@ -33,15 +33,16 @@ void loop() {
   unsigned long currentMicros = micros();
   if(currentMicros - previousMicros >= 180000) {
     previousMicros = currentMicros;
+    Throttle = getThrottle(5, Throttle);
     if(Throttle != 0) {
-      sendCommand(LeftRight, ForwardBackward, Throttle);
+      // LeftRight, ForwardBackward, Throttle
+      sendCommand(0, 0, Throttle);
     }
-    Serial.println(LeftRight);
-    Serial.println(ForwardBackward);
+//    Serial.println(LeftRight);
+//    Serial.println(ForwardBackward);
     Serial.println(Throttle);
   }
 //  Throttle = map(analogRead(5), 0, 1023, 0, 127);
-  Throttle = getThrottle(5, Throttle);
   LeftRight = getTiltY(0) + CAL;
   ForwardBackward = getTiltX(1);
   
@@ -134,9 +135,9 @@ int getThrottle(int pin, int throttle) {
   int a = analogRead(pin);
   if (a > 460 && a < 530)
     a = 530;
-  int change = map(a, 167, 810, 3, -3);
+  int change = map(a, 167, 810, -5, 5);
   
-  int newThrottle = throttle + change;
+  int newThrottle = throttle + (change * 2);
   
   if (newThrottle > 127)
     newThrottle = 127;
