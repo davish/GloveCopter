@@ -1,4 +1,3 @@
-
 const int LED = 3; // The LED
 const int FREQ = 38000; // The carrier frequency
 const int ROTATION_STATIONARY = 63;
@@ -39,8 +38,10 @@ void loop() {
     }
     Serial.println(LeftRight);
     Serial.println(ForwardBackward);
+    Serial.println(Throttle);
   }
-  Throttle = map(analogRead(5), 0, 1023, 0, 127);
+//  Throttle = map(analogRead(5), 0, 1023, 0, 127);
+  Throttle = getThrottle(5, Throttle);
   LeftRight = getTiltY(1) + CAL;
   ForwardBackward = getTiltX(0);
   
@@ -127,6 +128,22 @@ int getTiltX(int pin) {
   if (r < -62)
     r = -62;
   return r;
+}
+
+int getThrottle(int pin, int throttle) {
+  int a = analogRead(pin);
+  if (a > 460 && a < 530)
+    a = 530;
+  int change = map(a, 167, 810, 3, -3);
+  
+  int newThrottle = throttle + change;
+  
+  if (newThrottle > 127)
+    newThrottle = 127;
+  if (newThrottle < 0)
+    newThrottle = 0;
+  
+  return newThrottle;
 }
 
 
