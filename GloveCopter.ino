@@ -42,8 +42,8 @@ void loop() {
   }
 //  Throttle = map(analogRead(5), 0, 1023, 0, 127);
   Throttle = getThrottle(5, Throttle);
-  LeftRight = getTiltY(1) + CAL;
-  ForwardBackward = getTiltX(0);
+  LeftRight = getTiltY(0) + CAL;
+  ForwardBackward = getTiltX(1);
   
   if (LeftRight > 62)
     LeftRight = 62;
