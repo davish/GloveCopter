@@ -52,7 +52,7 @@ Back from Winter Break, I'm starting to put together the less clunky version 2.0
 ## Remote is complete! ##
 ### 1/2/13 ###
 
-Today, I finished soldering everything onto the board. After the Arduino was on there, I tested the throttle joystick and IR LEDs to make sure everything was connected properly, and it was. Next was the accelerometer. I hooked it up and that worked fine as well.
+Today, I finished soldering everything onto the board. After the Arduino was on there, I tested the throttle joystick and IR LEDs to make sure everything was connected properly, and it was. Next was the accelerometer. I hooked it up and that worked fine as well. Throttle is up and running as well. Seems like everything is working, but adding more LEDs in series didn't seem to help with the range; it actually seems that the range might be less. I'll experiment a little more to see what's going on. Hopefully, it's smooth sailing from here on out.
 
 
 [1]: http://hackaday.com/2012/12/08/more-fun-with-syma-107-reverse-engineering/
