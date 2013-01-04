@@ -36,7 +36,7 @@ void loop() {
     Throttle = getThrottle(5, Throttle);
     if(Throttle != 0) {
       // LeftRight, ForwardBackward, Throttle
-      sendCommand(0, 0, Throttle);
+      sendCommand(LeftRight, ForwardBackward  , Throttle);
     }
 //    Serial.println(LeftRight);
 //    Serial.println(ForwardBackward);
